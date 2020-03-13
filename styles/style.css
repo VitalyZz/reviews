@@ -4,7 +4,7 @@
 }
 
 body {
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(9,9,121,1) 50%, rgba(0,212,255,1) 100%);
+    background-color: #36404A;
 }
 
 header {
@@ -66,7 +66,6 @@ a:hover {
 
 .card img {
     height: 400px;
-    background-size: center;
 }
 
 .card {
@@ -130,24 +129,28 @@ a:hover {
     justify-content: center;
 }
 
+.home_create {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .createReview {
-    position: absolute;
-    bottom: 200px;
-    left: 800px;
-    padding: 10px 30px;
-    border: 2px solid #07d846;
     color: #07d846;
-    background: transparent;
-    font-size: 24px;
-    font-weight: bold;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 22px;
+    font-weight: 600;
+    margin-left: 80px;
     transition: .3s;
 }
 
 .createReview:hover {
-    background-color: #07d846;
-    color: #fff;
-    border: 2px solid #07d846;
-    box-shadow: 0px 0px 30px #07d846;
+    color: #41ff7a;
+    background-image: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 1250px) {

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="home">Главная</a>
-        <div class="logreg">
-            <a href="#" class="sign_in">Вход</a>
-            <div class="palka"></div>
-            <a href="#" class="sign_up">Регистрация</a>
-        </div>
-    </header>
+    <?php require_once 'header.php'?>
     <section class="review">
         <div class="review-container">
             <div class="review-up">
@@ -29,10 +25,12 @@
                     <div class="review_author">Автор: Виталий</div>
                 </div>
                 <div class="poster">
-                    <img src="poster.jpg" alt="">
+                    <img src="img/poster.jpg" alt="">
                 </div>
             </div>
-            <div class="review_text">В фильме Миссия невыполнима: Протокол Фантом после взрыва Московского Кремля подразделение МВФ закрывается и является главным подозреваемым по данному делу. Агенты вынуждены скрываться, и помощи им ждать уже не откуда. Итан Хант и его коллеги должны собраться с силами и очистить своё имя от необоснованных обвинений, выходя на след настоящих террористов. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur incidunt quam voluptatibus assumenda optio sequi animi ipsam vitae asperiores excepturi voluptas error, cumque quisquam, commodi nesciunt tempora unde! Quisquam dolor numquam ab vel voluptatibus eligendi, architecto dolorum mollitia id impedit corrupti eius nisi ducimus voluptatem sequi sed quia ipsam iure et repellat? Sit, officia assumenda in veritatis dicta magni nostrum nisi dolorem voluptas eveniet accusantium harum sunt fugiat deleniti numquam, dolore, vero repudiandae! A accusantium necessitatibus rem asperiores modi, illum blanditiis libero quasi consequatur praesentium doloribus illo aut ipsum ratione quam odio ex optio et sed! Repellat aliquam explicabo laborum.</div>
+            <div class="review_text">В фильме Миссия невыполнима: Протокол Фантом после взрыва Московского Кремля подразделение МВФ закрывается и является главным подозреваемым по данному делу. Агенты вынуждены скрываться, и помощи им ждать уже не откуда. Итан Хант и его коллеги должны собраться с силами и очистить своё имя от необоснованных обвинений, выходя на след настоящих террористов.</div>
+
+            <?php if(isset($_SESSION['user'])):?>
             <form action="" class="write_comment">
                 <label for="text">Написать комментарий:</label>
                 <textarea name="text" id="" rows="5"></textarea>
@@ -40,6 +38,8 @@
                     <button type="submit" class="submit_comment">Отправить</button>
                 </div>
             </form>
+            <?php endif;?>
+            <p class="commentsTitle">Комментарии:</p>
             <div class="comments">
                 <div class="comment">
                     <div class="block-up">

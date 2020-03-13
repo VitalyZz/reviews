@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,22 +11,16 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="home">Главная</a>
-        <div class="logreg">
-            <a href="#" class="sign_in">Вход</a>
-            <div class="palka"></div>
-            <a href="#" class="sign_up">Регистрация</a>
-        </div>
-    </header>
+    <?php require_once 'header.php'?>
+
     <section class="sect_cards">
         <div class="container">
             <div class="row boy">
                 <div class="card-moy">
                     <div class="card" style="width: 18rem;">
-                        <img src="poster.jpg" class="card-img-top" alt="img">
+                        <img src="img/poster.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
-                            <a href="review.html?id=1" class="film_title">Миссия невыполнима протокол фантом</a>
+                            <a href="review.php?id=1" class="film_title">Миссия невыполнима протокол фантом</a>
                             <div class="under_panel">
                                 <span class="author">Виталий</span>
                                 <span class="date">05.03.2020</span>
@@ -31,7 +28,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <img src="avatar.jpg" class="card-img-top" alt="img">
+                        <img src="img/avatar.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
                             <a href="#" class="film_title">Аватар</a>
                             <div class="under_panel">
@@ -41,7 +38,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <img src="vikings.jpg" class="card-img-top" alt="img">
+                        <img src="img/vikings.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
                             <a href="#" class="film_title">Викинги</a>
                             <div class="under_panel">
@@ -51,7 +48,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <img src="poster.jpg" class="card-img-top" alt="img">
+                        <img src="img/poster.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
                             <a href="#" class="film_title">Миссия невыполнима протокол фантом</a>
                             <div class="under_panel">
@@ -61,7 +58,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <img src="avatar.jpg" class="card-img-top" alt="img">
+                        <img src="img/avatar.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
                             <a href="#" class="film_title">Аватар</a>
                             <div class="under_panel">
@@ -71,7 +68,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 18rem;">
-                        <img src="vikings.jpg" class="card-img-top" alt="img">
+                        <img src="img/vikings.jpg" class="card-img-top" alt="img">
                         <div class="card-body">
                             <a href="#" class="film_title">Викинги</a>
                             <div class="under_panel">
@@ -81,7 +78,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="createReview">Создать</button>
             </div>
         </div>
     </section>
