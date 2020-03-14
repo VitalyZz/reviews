@@ -236,3 +236,7 @@ form {
 .logreg .exitFromSite:hover {
     color: #FF4D4D;
 }
+
+header {
+    border-bottom: 1px solid #61636d;
+}

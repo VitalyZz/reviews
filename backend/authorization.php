@@ -1,8 +1,9 @@
 <?php
 session_start();
+require_once '../connection.php';
 
 // Проверка на существование сессии
-if(isset($_SESSION['user'])) {
+if(empty($_POST) == true) {
     header('Location: ../index.php');
 }
 

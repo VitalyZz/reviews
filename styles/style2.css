@@ -81,8 +81,7 @@
 
 .write_comment .submit_comment {
     padding: 5px 10px;
-    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    box-shadow: 0px 0px 20px #00f2fe;
+    background-color: #0092fe;
     font-weight: bold;
     font-size: 22px;
     color: #fff;
@@ -91,11 +90,11 @@
     float: right;
     margin-top: 20px;
     cursor: pointer;
+    transition: .3s;
 }
 
 .write_comment .submit_comment:hover {
-    background: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
-    box-shadow: 0px 0px 20px #4facfe;
+    box-shadow: 0px 0px 20px #00dffe;
 }
 
 .comment {
@@ -138,4 +137,17 @@
     font-weight: bold;
     font-size: 28px;
     color: #fff;
+}
+
+.noTrailer {
+    width: 730px;
+    height: 410px;
+    background-color: #6b7682;
+    color: #36404A;
+    font-size: 50px;
+    font-weight: 900;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

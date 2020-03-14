@@ -1,4 +1,8 @@
 <?php
+if (strpos($_SERVER['SCRIPT_NAME'], 'header') == true) {
+    header('Location: index.php');
+}
+
 session_start();
 ?>
 <link rel="stylesheet" href="styles/formsLogReg.css">
@@ -19,7 +23,7 @@ session_start();
 
         <?php if(isset($_SESSION['user'])):?>
             <span class="nameOfUser">Привет <?=$_SESSION['user']['name']?>!</span>
-            <a href="RegAuthExit/exit.php" class="exitFromSite">Выход</a>
+            <a href="backend/exit.php" class="exitFromSite">Выход</a>
         <?php endif;?>
     </div>
 </header>
@@ -36,7 +40,7 @@ session_start();
             <button class="toggle-btn loginBtn"">Вход</button>
             <button class="toggle-btn registerBtn">Регистрация</button>
         </div>
-        <form action="RegAuthExit/authorization.php" method="POST" class="input-group" id="login">
+        <form action="backend/authorization.php" method="POST" class="input-group" id="login">
             <label for="email">Почта:</label>
             <input type="text" name="email" class="input-field" required>
 
@@ -45,7 +49,7 @@ session_start();
 
             <button type="submit" class="submit-btn">Войти</button>
         </form>
-        <form action="RegAuthExit/registration.php" method="POST" class="input-group" id="register">
+        <form action="backend/registration.php" method="POST" class="input-group" id="register">
             <label for="name">Имя:</label>
             <input type="text" name="name" class="input-field" required>
 

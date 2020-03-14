@@ -1,4 +1,7 @@
 <?php
+if (strpos($_SERVER['SCRIPT_NAME'], 'connection') == true) {
+    header('Location: index.php');
+}
 $driver = 'pgsql';
 $host = 'localhost';
 $db_name = 'reviews';
