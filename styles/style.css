@@ -4,8 +4,8 @@
 }
 
 body {
-    background-color: #36404A;
-    font-family: Arial;
+    background-color: #354758;
+    /*font-family: Arial sans-serif;*/
 }
 
 header {
@@ -152,6 +152,10 @@ a:hover {
     background-image: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.sect_cards {
+    margin-bottom: 20px;
 }
 
 @media (max-width: 1250px) {

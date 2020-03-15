@@ -17,12 +17,11 @@ $reviews = $statement->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <?php require_once 'header.php'?>
-
     <section class="sect_cards">
         <div class="container">
             <div class="row boy">
                 <div class="card-moy">
-                    <?php foreach($reviews as $review):?>
+                    <?php foreach ($reviews as $review):?>
                         <div class="card" style="width: 18rem;">
                             <img src="<?=$review['poster']?>" class="card-img-top" alt="img">
                             <div class="card-body">

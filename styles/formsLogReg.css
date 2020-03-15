@@ -240,3 +240,38 @@ form {
 header {
     border-bottom: 1px solid #61636d;
 }
+
+.errors_output {
+    display: none;
+    background-color: #36404A;
+    position: absolute;
+    top: 0;
+    left: -400px;
+    z-index: 1;
+    width: 300px;
+    text-align: center;
+    border-radius: 15px 15px 3px 3px;
+}
+
+.errors_output_header {
+    border-radius: 15px 15px 0 0;
+    padding: 5px;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    background-color: #ff6a5e;
+}
+
+.errors_output_text {
+    padding: 5px;
+    font-size: 18px;
+    color: #ff6a5e;
+    font-weight: 600;
+}
+
+.success {
+    font-size: 28px;
+    color: #07d846 ;
+    font-weight: 600;
+    margin-left: 300px;
+}

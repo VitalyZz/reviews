@@ -1,11 +1,12 @@
 <?php
 session_start();
 
-if(empty($_POST) == true) {
-    header('Location: ../index.php');
-}
-
 require_once '../connection.php';
+require_once 'functions.php';
+
+if (empty($_POST)) {
+    switchingPage();
+}
 
 $name = $_POST['name'];
 $text = $_POST['text'];
@@ -15,12 +16,38 @@ $idUser = $_SESSION['user']['id'];
 $namePoster = $_FILES['poster']['name'];
 $tmpNamePoster = $_FILES['poster']['tmp_name'];
 
-// Удаляем лишнее из ссылки на трейлер
+$patternName = '/[a-zа-я]+/iu';
+$patternText = '/[a-zа-я]+/iu';
+$patternTrailer = '/\?v=/i';
 
+$messageFields = "Не все поля заполнены.\n Обязательные поля: название, текст и постер!";
+$messageName = "Не верно введено поле name!\n Поле должно иметь хотя бы одну букву!";
+$messageText = "Не верно введено поле text!\n Поле должно иметь хотя бы одну букву!";
+$messageTrailer = "Не верно введено поле trailer!\n Ссылка на трейлер должна быть корректна";
+
+// Проверка на пустоту полей
+checkEmptyFields([$name, $text, $namePoster], 'poster', $messageFields, "Location: ../create.php");
+
+// Проверка поля name
+checkField($patternName, $name, 'poster', $messageName, 'Location: ../create.php');
+
+// Проверка поля text
+checkField($patternText, $text, 'poster', $messageText, 'Location: ../create.php');
+
+// Проверка поля trailer
+checkField($patternTrailer, $trailer, 'poster', $messageTrailer, 'Location: ../create.php');
+
+// Проверка на формат файла
+if (exif_imagetype($_FILES['poster']['tmp_name']) == false) {
+    $_SESSION['message']['poster'] = 'Постер должен быть картинкой!';
+    switchingPage('Location: ../create.php');
+}
+
+// Удаляем лишнее из ссылки на трейлер
 $regexp = "/.+\?v=/";
 $trailer = preg_replace($regexp, '', $trailer);
 
-if(strpos($trailer, "&")) {
+if (strpos($trailer, "&")) {
     $regexp = "/\&.+$/";
     $trailer = preg_replace($regexp, '', $trailer);
 }
@@ -42,8 +69,8 @@ $arr = [
     'text_review' => $text
 ];
 
-$sql = "INSERT INTO reviews(id_user, film_title, poster, trailer, text_review) VALUES(:id_user, :film_title, :poster, :trailer, :text_review)";
+$sql = "INSERT INTO reviews(id_user, film_title, poster, trailer, text_review) 
+VALUES(:id_user, :film_title, :poster, :trailer, :text_review)";
 $statement = $pdo->prepare($sql);
 $statement->execute($arr);
-
-header('Location: ../index.php');
+switchingPage('Location: ../index.php');

@@ -1,40 +1,64 @@
 <?php
 session_start();
 
-if(empty($_POST) == true) {
-    header('Location: ../index.php');
-}
-
 require_once '../connection.php';
+require_once 'functions.php';
+
+if (empty($_POST)) {
+    switchingPage();
+}
 
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
 
+$_SESSION['data'] = [
+    'name' => $name,
+    'email' => $email,
+    'password' =>$password,
+    'confirm_password' => $confirm_password,
+    'consent' => $_POST['consent']
+];
+
+$patternName = '/^[а-я\-\s]+$/iu';
+$patternEmail = '/^.+@.+\..+$/i';
+$patternPassword = '/^(?=\w{6})\d*[a-z][a-z\d]*$/i';
+
+$messageName = "Не верно введено поле name!\n Должны быть использованы русские буквы, пробелы и дефисы.";
+$messageEmail = "Не верно введено поле email!\n Поле должно содержать только корректный email.";
+$messagePassword = "Не верно введено поле password!\n Поле должно содержать минимум 6 символов и максимум 50.";
+
 // Проверка на пустоту полей
-if(in_array('', [$name, $email, $password, $confirm_password])) {
-    $_SESSION['message'] = 'Не все поля заполнены!';
-    header('Location: ../index.php');
-}
+checkEmptyFields([$name, $email, $password, $confirm_password], 'reg');
 
-// Проверка на согласие обработки данных
-if(!isset($_POST['consent'])) {
-    $_SESSION['message'] = 'Нет согласия на обработку данных';
-    header('Location: ../index.php');
-}
+// Проверка поля name
+checkField($patternName, $name, 'reg', $messageName);
 
-//^[а-яА-Я- ]{1,20}$ - для имени
-//.+@.+\..+ - для email
-//^[a-zA-Z0-9]{5,30}$ - для пароля - change
+// Проверка поля email
+checkField($patternEmail, $email, 'reg', $messageEmail);
+
+// Проверка поля password
+checkField($patternPassword, $password, 'reg', $messagePassword);
+
 
 // Проверка на равность паролей
-if(!($password === $confirm_password)) {
+if (!($password === $confirm_password)) {
+    $_SESSION['message']['reg'] = 'Пароли не совпадают';
+    switchingPage();
+}
+
+// Проверка согласия на обработку данных
+if (isset($_POST['consent'])) {
     // Хешируем пароль
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     // Заносим все переменные в массив
-    $arr = ['name' => $name, 'email' => $email, 'password' => $password];
+    $arr = [
+        'name' => $name,
+        'email' => $email,
+        'password' => $password
+    ];
 
     // Отправляем данные
     $sql = "INSERT INTO users(name, email, password) VALUES(:name, :email, :password)";
@@ -55,55 +79,11 @@ if(!($password === $confirm_password)) {
         'access' => $result['access']
     ];
 
-    $_SESSION['message'] = 'Успешно зарегестрировались';
-    header('Location: ../index.php');
+    $_SESSION['message']['success'] = 'Успешно зарегистрировались!';
+    switchingPage();
 }
+
 else {
-    $_SESSION['message'] = 'Пароли не совпадают';
-    header('Location: ../index.php');
+    $_SESSION['message']['reg'] = 'Нет согласия на обработку данных';
+    switchingPage();
 }
-//
-//// Проверка на согласие обработки данных
-//if(isset($_POST['consent'])) {
-//
-//    // Проверка на равность паролей
-//    if($password === $confirm_password) {
-//        // Хешируем пароль
-//        $password = password_hash($password, PASSWORD_DEFAULT);
-//
-//        // Заносим все переменные в массив
-//        $arr = ['name' => $name, 'email' => $email, 'password' => $password];
-//
-//        // Отправляем данные
-//        $sql = "INSERT INTO users(name, email, password) VALUES(:name, :email, :password)";
-//        $statement = $pdo->prepare($sql);
-//        $statement->execute($arr);
-//
-//        // Получаем данные для занесения в сессию
-//        $sqlGetData = "SELECT id_user, name, access FROM users WHERE email = ?";
-//        $statementGetData = $pdo->prepare($sqlGetData);
-//        $statementGetData->bindValue(1, $email);
-//        $statementGetData->execute();
-//        $result = $statementGetData->fetch(PDO::FETCH_ASSOC);
-//
-//        // Заносим в сессию данные о пользователе
-//        $_SESSION['user'] = [
-//            'id' => $result['id_user'],
-//            'name' => $result['name'],
-//            'access' => $result['access']
-//        ];
-//
-//        $_SESSION['message'] = 'Успешно зарегестрировались';
-//        header('Location: ../index.php');
-//    }
-//
-//    else {
-//        $_SESSION['message'] = 'Пароли не совпадают';
-//        header('Location: ../index.php');
-//    }
-//}
-//
-//else {
-//    $_SESSION['message'] = 'Нет согласия на обработку данных';
-//    header('Location: ../index.php');
-//}

@@ -1,6 +1,7 @@
 <?php
 if (strpos($_SERVER['SCRIPT_NAME'], 'connection') == true) {
     header('Location: index.php');
+    exit();
 }
 $driver = 'pgsql';
 $host = 'localhost';

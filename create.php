@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-if($_SESSION['user']['access'] == 0) {
+if ($_SESSION['user']['access'] == 0) {
     header('Location: ../index.php');
+    exit();
 }
 
 ?>
@@ -21,6 +22,14 @@ if($_SESSION['user']['access'] == 0) {
 
     <section class="createReviewSection">
         <div class="container_createreview">
+            <?php if(isset($_SESSION['message']['poster']) == true):?>
+            <div class="errors_output1">
+                <div class="errors_output_header1">Ошибка!</div>
+                <div class="errors_output_text1">
+                    <?=$_SESSION['message']['poster'];?>
+                </div>
+            </div>
+            <?php endif; unset($_SESSION['message'])?>
             <h1 class="createReviewTitle">Создание обзора</h1>
             <form action="backend/createReview.php" method="POST" enctype="multipart/form-data" class="createReviewForm">
                 <label for="name">Название:</label>

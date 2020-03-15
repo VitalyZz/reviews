@@ -1,24 +1,37 @@
 <?php
 session_start();
-require_once '../connection.php';
 
-// Проверка на существование сессии
-if(empty($_POST) == true) {
-    header('Location: ../index.php');
+require_once '../connection.php';
+require_once 'functions.php';
+
+if (empty($_POST)) {
+    switchingPage();
 }
-
-require_once '../connection.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+
+$_SESSION['data'] = [
+    'email' => $email,
+    'password' => $password
+];
+
+// Проверка на пустоту полей
+checkEmptyFields([$email, $password], 'auth');
 
 $sql = "SELECT id_user, name, access, password FROM users WHERE email = ?";
 $statement = $pdo->prepare($sql);
 $statement->bindValue(1, $email);
 $statement->execute();
 $result = $statement->fetch(PDO::FETCH_ASSOC);
+$count = $statement->rowCount();
 
-if(password_verify($password, $result['password'])) {
+if ($count == 0) {
+    $_SESSION['message']['auth'] = 'Неправильный логин!';
+    switchingPage();
+}
+
+if (password_verify($password, $result['password'])) {
     // Заносим в сессию данные о пользователе
     $_SESSION['user'] = [
         'id' => $result['id_user'],
@@ -26,6 +39,9 @@ if(password_verify($password, $result['password'])) {
         'access' => $result['access']
     ];
 
-    $_SESSION['message'] = 'Вы авторизовались';
-    header('Location: ../index.php');
+    $_SESSION['message']['success'] = 'Вы авторизовались!';
+    switchingPage();
+} else {
+    $_SESSION['message']['auth'] = 'Неправильный пароль!';
+    switchingPage();
 }
