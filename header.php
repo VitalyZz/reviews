@@ -86,7 +86,7 @@ session_start();
             <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
             <button type="submit" class="submit-btn">Зарегистрироваться</button>
         </form>
-        <?php unset($_SESSION['data'])?>
+        <?php if(isset($_SESSION['data']['email'])) unset($_SESSION['data'])?>
     </div>
 </div>
 <script src="scripts/script.js"></script>

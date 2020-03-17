@@ -3,10 +3,6 @@ const signUp = document.querySelector('.sign_up');
 
 const closeModal = document.querySelector('.closeModal');
 
-const realFileBtn = document.querySelector(".real-file");
-const customBtn = document.querySelector(".custom-button");
-const customTxt = document.querySelector(".custom-text");
-
 let loginForm = document.querySelector('#login');
 let registerForm = document.querySelector('#register');
 let btnForm = document.querySelector('#btn');
@@ -23,19 +19,6 @@ closeModal.addEventListener('click', closeModalWindow);
 
 loginBtn.addEventListener('click', login);
 registerBtn.addEventListener('click', register);
-
-customBtn.addEventListener("click", function() {
-    realFileBtn.click();
-});
-
-realFileBtn.addEventListener("change", function() {
-    if (realFileBtn.value) {
-        customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-        customTxt.style.color = '#07D846';
-    } else {
-        customTxt.innerHTML = "Постер не выбран";
-    }
-});
 
 function register() {
     loginForm.style.left = '-400px';

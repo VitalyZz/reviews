@@ -13,6 +13,12 @@ $text = $_POST['text'];
 $trailer = $_POST['trailer'];
 $idUser = $_SESSION['user']['id'];
 
+$_SESSION['data'] = [
+    'name' => $name,
+    'text' => $text,
+    'trailer' => $trailer
+];
+
 $namePoster = $_FILES['poster']['name'];
 $tmpNamePoster = $_FILES['poster']['tmp_name'];
 

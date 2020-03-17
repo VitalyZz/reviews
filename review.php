@@ -56,12 +56,13 @@ $resultComments = $statementComment->fetchAll(PDO::FETCH_ASSOC);
             <?php if (isset($_SESSION['user'])):?>
             <form id="anchorComment" action="backend/createComment.php" method="POST" class="write_comment">
                 <label for="text">Написать комментарий: <span class="error_comment"><?=$_SESSION['message']['comment']?></span></label>
-                <textarea name="text" id="" rows="5"></textarea>
+                <textarea name="text" id="" rows="5"><?=$_SESSION['data']['text']?></textarea>
                 <input type="hidden" name="id_review" value="<?=$_GET['id_review']?>">
                 <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
                 <div class="review-btn">
                     <button type="submit" class="submit_comment">Отправить</button>
                 </div>
+                <?php unset($_SESSION['data'])?>
             </form>
             <?php endif; unset($_SESSION['message'])?>
 

@@ -12,6 +12,10 @@ $id_user = $_SESSION['user']['id'];
 $id_review = $_POST['id_review'];
 $comment_text = $_POST['text'];
 
+$_SESSION['data'] = [
+    'text' => $comment_text
+];
+
 $patternCommentText = '/[a-zа-я]+/iu';
 
 $messageCommentText = "Поле должно иметь хотя бы одну букву!";

@@ -35,10 +35,11 @@ require_once 'data/connection.php';
             <h1 class="createReviewTitle">Создание обзора</h1>
             <form action="backend/createReview.php" method="POST" enctype="multipart/form-data" class="createReviewForm">
                 <label for="name">Название:</label>
-                <input type="text" name="name" placeholder="Введите название фильма">
+                <input type="text" name="name" placeholder="Введите название фильма"
+                       value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['name'];?>">
 
                 <label for="text">Текст:</label>
-                <textarea name="text" id="" cols="30" rows="10" placeholder="Напишите текст"></textarea>
+                <textarea name="text" id="" cols="30" rows="10" placeholder="Напишите текст"><?php if (isset($_SESSION['data'])) echo $_SESSION['data']['text'];?></textarea>
 
                 <label for="poster">Постер:</label>
                 <div class="file-wrapper">
@@ -48,15 +49,17 @@ require_once 'data/connection.php';
                 </div>
 
                 <label for="trailer">Трейлер:</label>
-                <input type="text" name="trailer" placeholder="Вставьте ссылку на трейлер">
+                <input type="text" name="trailer" placeholder="Вставьте ссылку на трейлер"
+                       value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['trailer'];?>">
 
                 <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
                 <div class="wrapperForBtnForm">
                     <button type="submit" class="addReviewBtn">Добавить</button>
                 </div>
             </form>
+            <?php unset($_SESSION['data'])?>
         </div>
     </section>
-    <script src="scripts/script.js"></script>
+    <script src="scripts/fileInput.js"></script>
 </body>
 </html>
