@@ -3,9 +3,13 @@ const signUp = document.querySelector('.sign_up');
 
 const closeModal = document.querySelector('.closeModal');
 
-let x = document.querySelector('#login');
-let y = document.querySelector('#register');
-let z = document.querySelector('#btn');
+const realFileBtn = document.querySelector(".real-file");
+const customBtn = document.querySelector(".custom-button");
+const customTxt = document.querySelector(".custom-text");
+
+let loginForm = document.querySelector('#login');
+let registerForm = document.querySelector('#register');
+let btnForm = document.querySelector('#btn');
 
 let loginBtn = document.querySelector('.loginBtn');
 let registerBtn = document.querySelector('.registerBtn');
@@ -20,17 +24,30 @@ closeModal.addEventListener('click', closeModalWindow);
 loginBtn.addEventListener('click', login);
 registerBtn.addEventListener('click', register);
 
+customBtn.addEventListener("click", function() {
+    realFileBtn.click();
+});
+
+realFileBtn.addEventListener("change", function() {
+    if (realFileBtn.value) {
+        customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+        customTxt.style.color = '#07D846';
+    } else {
+        customTxt.innerHTML = "Постер не выбран";
+    }
+});
+
 function register() {
-    x.style.left = '-400px';
-    y.style.left = 'calc(50% - 135px)';
-    z.style.left = '170px';
+    loginForm.style.left = '-400px';
+    registerForm.style.left = 'calc(50% - 135px)';
+    btnForm.style.left = '170px';
     document.querySelector('.form-box').style.height = 630 + 'px';
 }
 
 function login() {
-    x.style.left = 'calc(50% - 135px)';
-    y.style.left = '450px';
-    z.style.left = '0px';
+    loginForm.style.left = 'calc(50% - 135px)';
+    registerForm.style.left = '450px';
+    btnForm.style.left = '0px';
     document.querySelector('.form-box').style.height = 500 + 'px';
 }
 
@@ -47,15 +64,15 @@ function closeModalWindow() {
 }
 
 function openSignUp() {
-    x.style.left = '-400px';
-    y.style.left = 'calc(50% - 135px)';
-    z.style.left = '170px';
+    loginForm.style.left = '-400px';
+    registerForm.style.left = 'calc(50% - 135px)';
+    btnForm.style.left = '170px';
     document.querySelector('.form-box').style.height = 630 + 'px';
 }
 
 function openSignIn() {
-    x.style.left = 'calc(50% - 135px)';
-    y.style.left = '450px';
-    z.style.left = '0px';
+    loginForm.style.left = 'calc(50% - 135px)';
+    registerForm.style.left = '450px';
+    btnForm.style.left = '0px';
     document.querySelector('.form-box').style.height = 500 + 'px';
 }

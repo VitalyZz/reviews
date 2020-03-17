@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-if (empty($_POST)) {
+require_once '../data/connection.php';
+require_once '../data/functions.php';
+
+if (empty($_POST) && !isset($_SESSION['user']['id'])) {
     switchingPage();
 }
-
-require_once '../connection.php';
-require_once 'functions.php';
 
 $id_user = $_SESSION['user']['id'];
 $id_review = $_POST['id_review'];

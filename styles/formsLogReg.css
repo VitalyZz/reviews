@@ -116,14 +116,12 @@ button:active, button:focus {
 }
 
 .check-box {
-    margin: 30px 10px 30px 0;
+    margin-left: 10px;
 }
 
-.consent {
-    color: #fff;
-    font-size: 12px;
-    bottom: 68px;
-    position: absolute;
+.consent-data-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 #login {
@@ -134,11 +132,6 @@ button:active, button:focus {
     left: 450px;
 }
 
-
-#register .check-box{
-    margin: 0;
-}
-
 label {
     font-size: 18px;
     font-weight: 400;
@@ -147,11 +140,6 @@ label {
 
 #register .input-field {
     margin-bottom: 10px;
-}
-
-.consent {
-    font-size: 16px;
-    margin-left: 25px;
 }
 
 #login .submit-btn{
@@ -274,4 +262,11 @@ header {
     color: #07d846 ;
     font-weight: 600;
     margin-left: 300px;
+}
+
+.consent_data {
+    font-size: 15px;
+    margin-bottom: 0;
+    margin-left: 20px;
+    order: 2;
 }

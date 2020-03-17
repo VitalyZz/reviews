@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require_once 'connection.php';
+require_once 'data/connection.php';
+require_once 'data/functions.php';
 
 $id_review = $_GET['id_review'];
 
@@ -34,29 +35,30 @@ $resultComments = $statementComment->fetchAll(PDO::FETCH_ASSOC);
     <section class="review">
         <div class="review-container">
             <div class="review-up">
-                <div class="title"><?=nl2br(htmlspecialchars($result['film_title']))?></div>
-                <div class="date"><?=nl2br(htmlspecialchars($result['date_added_review']))?></div>
+                <div class="title"><?=nl2br(HSC($result['film_title']))?></div>
+                <div class="date"><?=nl2br(HSC($result['date_added_review']))?></div>
             </div>
             <div class="block">
                 <div class="trailer">
                     <?php if (empty($result['trailer'])):?>
                     <div class="noTrailer">Трейлер отсутствует</div>
                     <?php else:?>
-                        <iframe width="730" height="410" src="https://www.youtube.com/embed/<?=nl2br(htmlspecialchars($result['trailer']))?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="730" height="410" src="https://www.youtube.com/embed/<?=nl2br(HSC($result['trailer']))?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <?php endif;?>
-                    <div class="review_author">Автор: <?=nl2br(htmlspecialchars($result['name']))?></div>
+                    <div class="review_author">Автор: <?=nl2br(HSC($result['name']))?></div>
                 </div>
                 <div class="poster">
-                    <img src="<?=nl2br(htmlspecialchars($result['poster']))?>" alt="">
+                    <img src="<?=nl2br(HSC($result['poster']))?>" alt="">
                 </div>
             </div>
-            <div class="review_text"><?=nl2br(htmlspecialchars($result['text_review']))?></div>
+            <div class="review_text"><?=nl2br(HSC($result['text_review']))?></div>
 
             <?php if (isset($_SESSION['user'])):?>
             <form id="anchorComment" action="backend/createComment.php" method="POST" class="write_comment">
                 <label for="text">Написать комментарий: <span class="error_comment"><?=$_SESSION['message']['comment']?></span></label>
                 <textarea name="text" id="" rows="5"></textarea>
                 <input type="hidden" name="id_review" value="<?=$_GET['id_review']?>">
+                <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
                 <div class="review-btn">
                     <button type="submit" class="submit_comment">Отправить</button>
                 </div>
@@ -71,10 +73,10 @@ $resultComments = $statementComment->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($resultComments as $comment):?>
                 <div class="comment">
                     <div class="block-up">
-                        <div class="comment_author"><?=nl2br(htmlspecialchars($comment['name']))?></div>
+                        <div class="comment_author"><?=nl2br(HSC($comment['name']))?></div>
                         <div class="date_comment"><?=$comment['date_added_comment']?></div>
                     </div>
-                    <div class="text_comment"><?=nl2br(htmlspecialchars($comment['comment_text']))?></div>
+                    <div class="text_comment"><?=nl2br(HSC($comment['comment_text']))?></div>
                 </div>
                 <?php endforeach;?>
             </div>

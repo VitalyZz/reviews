@@ -55,16 +55,6 @@ a:hover {
     margin-right: 40px;
 }
 
-.sign_in:after {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: calc(100% + 20px);
-    top: -10px;
-    background-color: #8f8f8f;
-    margin-left: 20px;
-}
-
 .card img {
     height: 400px;
 }

@@ -6,6 +6,8 @@ if ($_SESSION['user']['access'] == 0) {
     exit();
 }
 
+require_once 'data/connection.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,16 +41,22 @@ if ($_SESSION['user']['access'] == 0) {
                 <textarea name="text" id="" cols="30" rows="10" placeholder="Напишите текст"></textarea>
 
                 <label for="poster">Постер:</label>
-                <input type="file" name="poster">
+                <div class="file-wrapper">
+                    <input type="file" hidden="hidden" class="real-file" name="poster">
+                    <button type="button" class="custom-button">Выбрать</button>
+                    <span class="custom-text">Постер не выбран</span>
+                </div>
 
                 <label for="trailer">Трейлер:</label>
                 <input type="text" name="trailer" placeholder="Вставьте ссылку на трейлер">
 
+                <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
                 <div class="wrapperForBtnForm">
                     <button type="submit" class="addReviewBtn">Добавить</button>
                 </div>
             </form>
         </div>
     </section>
+    <script src="scripts/script.js"></script>
 </body>
 </html>

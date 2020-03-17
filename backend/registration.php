@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require_once '../connection.php';
-require_once 'functions.php';
+require_once '../data/connection.php';
+require_once '../data/functions.php';
 
-if (empty($_POST)) {
+if (empty($_POST) && isset($_SESSION['user']['id'])) {
     switchingPage();
 }
 
@@ -25,9 +25,9 @@ $patternName = '/^[а-я\-\s]+$/iu';
 $patternEmail = '/^.+@.+\..+$/i';
 $patternPassword = '/^(?=\w{6})\d*[a-z][a-z\d]*$/i';
 
-$messageName = "Не верно введено поле name!\n Должны быть использованы русские буквы, пробелы и дефисы.";
+$messageName = "Не верно введено поле name!\n Должны быть использованы только русские буквы, пробелы и дефисы.";
 $messageEmail = "Не верно введено поле email!\n Поле должно содержать только корректный email.";
-$messagePassword = "Не верно введено поле password!\n Поле должно содержать минимум 6 символов и максимум 50.";
+$messagePassword = "Не верно введено поле password!\n Поле должно содержать минимум 6 символов";
 
 // Проверка на пустоту полей
 checkEmptyFields([$name, $email, $password, $confirm_password], 'reg');
@@ -41,10 +41,21 @@ checkField($patternEmail, $email, 'reg', $messageEmail);
 // Проверка поля password
 checkField($patternPassword, $password, 'reg', $messagePassword);
 
-
 // Проверка на равность паролей
 if (!($password === $confirm_password)) {
     $_SESSION['message']['reg'] = 'Пароли не совпадают';
+    switchingPage();
+}
+
+// Проверка на существующий аккаунт
+$sqlCheckEmail = "SELECT email FROM users WHERE email = ?";
+$statementEmail = $pdo->prepare($sqlCheckEmail);
+$statementEmail->bindValue(1, $email);
+$statementEmail->execute();
+$count = $statementEmail->rowCount();
+
+if ($count == 1) {
+    $_SESSION['message']['reg'] = 'Аккаунт с таким email уже существует!';
     switchingPage();
 }
 

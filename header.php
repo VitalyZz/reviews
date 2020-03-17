@@ -11,18 +11,17 @@ session_start();
     <div class="home_create">
         <a href="index.php" class="home">Главная</a>
         <?php if ($_SESSION['user']['access'] == 1):?>
-        <a href="create.php" class="createReview">Создать</a>
+            <a href="create.php" class="createReview">Создать</a>
         <?php endif;?>
 
         <?php if (isset($_SESSION['message']['success']) == true):?>
-        <div class="success"><?=$_SESSION['message']['success']?></div>
+            <div class="success"><?=$_SESSION['message']['success']?></div>
         <?php endif;?>
     </div>
     <div class="logreg">
         <?php if (!isset($_SESSION['user'])):?>
-        <a href="#" class="sign_in">Вход</a>
-        <div class="palka"></div>
-        <a href="#" class="sign_up">Регистрация</a>
+            <a href="#" class="sign_in">Вход</a>
+            <a href="#" class="sign_up">Регистрация</a>
         <?php endif;?>
 
         <?php if (isset($_SESSION['user'])):?>
@@ -51,29 +50,40 @@ session_start();
         </div>
         <form action="backend/authorization.php" method="POST" class="input-group" id="login">
             <label for="email">Почта:</label>
-            <input type="text" name="email" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['email'];?>">
+            <input type="text" name="email" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['email'];?>">
 
             <label for="password">Пароль:</label>
-            <input type="password" name="password" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['password'];?>">
+            <input type="password" name="password" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['password'];?>">
 
+            <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
             <button type="submit" class="submit-btn">Войти</button>
         </form>
         <form action="backend/registration.php" method="POST" class="input-group" id="register">
             <label for="name">Имя:</label>
-            <input type="text" name="name" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['name'];?>">
+            <input type="text" name="name" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['name'];?>">
 
             <label for="email">Почта:</label>
-            <input type="email" name="email" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['email'];?>">
+            <input type="email" name="email" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['email'];?>">
 
             <label for="password">Пароль:</label>
-            <input type="password" name="password" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['password'];?>">
+            <input type="password" name="password" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['password'];?>">
 
             <label for="confirm_password">Повторный пароль:</label>
-            <input type="password" name="confirm_password" class="input-field" value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['confirm_password'];?>">
+            <input type="password" name="confirm_password" class="input-field"
+                   value="<?php if (isset($_SESSION['data'])) echo $_SESSION['data']['confirm_password'];?>">
 
-            <label for="consent" class="consent1">Согласие на обработку данных</label>
-            <input type="checkbox" class="check-box" name="consent" <?php if (isset($_SESSION['data']['consent'])):?> checked <?php endif;?>>
+            <div class="consent-data-wrapper">
+                <label for="consent" class="consent_data">Согласие на обработку данных</label>
+                <input type="checkbox" class="check-box" name="consent"
+                    <?php if (isset($_SESSION['data']['consent'])):?> checked <?php endif;?>>
+            </div>
 
+            <input type="hidden" name="_token" value="<?=$_SESSION['_token']?>">
             <button type="submit" class="submit-btn">Зарегистрироваться</button>
         </form>
         <?php unset($_SESSION['data'])?>
@@ -98,8 +108,3 @@ if (isset($_SESSION['message']['reg']) == true) unset($_SESSION['message']['reg'
 if (isset($_SESSION['message']['auth']) == true) unset($_SESSION['message']['auth']);
 if (isset($_SESSION['message']['success']) == true) unset($_SESSION['message']['success']);
 ?>
-
-<!--<script>-->
-<!--    register();-->
-<!--    openModalWindow();-->
-<!--</script>-->

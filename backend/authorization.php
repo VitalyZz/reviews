@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require_once '../connection.php';
-require_once 'functions.php';
+require_once '../data/connection.php';
+require_once '../data/functions.php';
 
-if (empty($_POST)) {
+if (empty($_POST) && !isset($_SESSION['user']['id'])) {
     switchingPage();
 }
 

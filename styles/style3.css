@@ -28,7 +28,7 @@
     margin-top: 20px;
 }
 
-.createReviewForm input:not(:nth-of-type(2)) {
+.createReviewForm input {
     font-weight: 600;
     font-size: 18px;
     color: #000;
@@ -83,3 +83,39 @@
     color: #ff6a5e;
     font-weight: 600;
 }
+
+.custom-button {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px 30px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #07D846;
+    background-color: transparent;
+    border: 3px solid #07D846;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.custom-button:hover {
+    background-color: #07D846;
+    color: #fff;
+}
+
+.custom-text {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: #aaa;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.file-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+

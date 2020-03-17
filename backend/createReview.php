@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-require_once '../connection.php';
-require_once 'functions.php';
+require_once '../data/connection.php';
+require_once '../data/functions.php';
 
-if (empty($_POST)) {
+if (empty($_POST) && $_SESSION['user']['access'] == 0) {
     switchingPage();
 }
 
@@ -35,7 +35,9 @@ checkField($patternName, $name, 'poster', $messageName, 'Location: ../create.php
 checkField($patternText, $text, 'poster', $messageText, 'Location: ../create.php');
 
 // Проверка поля trailer
-checkField($patternTrailer, $trailer, 'poster', $messageTrailer, 'Location: ../create.php');
+if (!empty($trailer)) {
+    checkField($patternTrailer, $trailer, 'poster', $messageTrailer, 'Location: ../create.php');
+}
 
 // Проверка на формат файла
 if (exif_imagetype($_FILES['poster']['tmp_name']) == false) {
