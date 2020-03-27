@@ -59,22 +59,15 @@ $(document).ready(function() {
             data: data,
             success: function(result) {
                 $('.error_comment').text(result['message']).css({color:'#65fe1a'});
-
-                $('.comments').prepend
-                (`
-                <div class="comment">
-                    <div class="block-up">
-                        <div class="comment_author"></div>
-                        <div class="date_comment"></div>
-                    </div>
-                    <div class="text_comment"></div>
-                </div>
-                `);
-                $('.comment_author:first').html(result['comment_author']);
-                $('.date_comment:first').html(result['date_comment']);
-                $('.text_comment:first').html(nl2br(htmlspecialchars(result['text_comment'])));
-
                 $('#anchorComment')[0].reset();
+                $('.comments').load(`../backend/fetch.php?id_review=${idValue}`);
+                setTimeout(function() {
+                    $('.comment:first').fadeOut(500).fadeIn().css({backgroundColor: 'rgb(187,254,161)'});
+
+                    setTimeout(function() {
+                        $('.comment:first').css({backgroundColor: '#646464'});
+                    }, 500);
+                }, 500);
             },
             error: function(result) {
                 $('.error_comment').text(result.responseJSON).css({color:'#FF6464'});
