@@ -1,17 +1,17 @@
 <?php
 // Проверка на пустоту полей
-function checkEmptyFields($arr, $sessionSecond, $message = "Не все поля заполнены", $page = 1) {
+function checkEmptyFields($arr, $message = "Не все поля заполнены") {
     if (in_array('', $arr)) {
-        $_SESSION['message'][$sessionSecond] = $message;
-        switchingPage($page);
+        header('HTTP/1.0 403 Error!');
+        die (json_encode($message));
     }
 }
 
 // Проверка поля регулярным выражением
-function checkField($pattern, $data, $sessionSecond, $message, $page = 1) {
+function checkField($pattern, $data, $message) {
     if (preg_match($pattern, $data) == false) {
-        $_SESSION['message'][$sessionSecond] = $message;
-        switchingPage($page);
+        header('HTTP/1.0 403 Error!');
+        die (json_encode($message));
     }
 }
 
@@ -30,6 +30,6 @@ function switchingPage($page = 1) {
 }
 
 // Преобразование специальных символов в html сущности
-function HSC($element) {
+function formatText($element) {
     return htmlspecialchars($element);
 }

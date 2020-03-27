@@ -1,8 +1,7 @@
 <?php
-session_start();
+require_once '../data/connectionFiles.php';
 
-require_once '../data/connection.php';
-require_once '../data/functions.php';
+header('Content-type: application/json; charset=utf-8');
 
 if (empty($_POST) && isset($_SESSION['user']['id'])) {
     switchingPage();
@@ -13,14 +12,6 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
 
-$_SESSION['data'] = [
-    'name' => $name,
-    'email' => $email,
-    'password' =>$password,
-    'confirm_password' => $confirm_password,
-    'consent' => $_POST['consent']
-];
-
 $patternName = '/^[а-я\-\s]+$/iu';
 $patternEmail = '/^.+@.+\..+$/i';
 $patternPassword = '/^(?=\w{6})\d*[a-z][a-z\d]*$/i';
@@ -30,21 +21,21 @@ $messageEmail = "Не верно введено поле email!\n Поле до�
 $messagePassword = "Не верно введено поле password!\n Поле должно содержать минимум 6 символов";
 
 // Проверка на пустоту полей
-checkEmptyFields([$name, $email, $password, $confirm_password], 'reg');
+checkEmptyFields([$name, $email, $password, $confirm_password]);
 
 // Проверка поля name
-checkField($patternName, $name, 'reg', $messageName);
+checkField($patternName, $name, $messageName);
 
 // Проверка поля email
-checkField($patternEmail, $email, 'reg', $messageEmail);
+checkField($patternEmail, $email, $messageEmail);
 
 // Проверка поля password
-checkField($patternPassword, $password, 'reg', $messagePassword);
+checkField($patternPassword, $password, $messagePassword);
 
 // Проверка на равность паролей
 if (!($password === $confirm_password)) {
-    $_SESSION['message']['reg'] = 'Пароли не совпадают';
-    switchingPage();
+    header('HTTP/1.0 403 Error!');
+    die (json_encode('Пароли не совпадают!'));
 }
 
 // Проверка на существующий аккаунт
@@ -55,12 +46,12 @@ $statementEmail->execute();
 $count = $statementEmail->rowCount();
 
 if ($count == 1) {
-    $_SESSION['message']['reg'] = 'Аккаунт с таким email уже существует!';
-    switchingPage();
+    header('HTTP/1.0 403 Error!');
+    die (json_encode('Аккаунт с таким email уже существует!'));
 }
 
 // Проверка согласия на обработку данных
-if (isset($_POST['consent'])) {
+if ($_POST['consent'] === 'Yes') {
     // Хешируем пароль
     $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -90,11 +81,11 @@ if (isset($_POST['consent'])) {
         'access' => $result['access']
     ];
 
-    $_SESSION['message']['success'] = 'Успешно зарегистрировались!';
-    switchingPage();
-}
-
-else {
-    $_SESSION['message']['reg'] = 'Нет согласия на обработку данных';
-    switchingPage();
+    die (json_encode([
+        "message" => "Успешно зарегистрировались!",
+        "url" => $_SERVER['HTTP_REFERER']
+    ]));
+} else {
+    header('HTTP/1.0 403 Error!');
+    die (json_encode('Нет согласия на обработку данных!'));
 }

@@ -1,23 +1,17 @@
 <?php
-session_start();
+require_once '../data/connectionFiles.php';
 
-require_once '../data/connection.php';
-require_once '../data/functions.php';
+header('Content-type: application/json; charset=utf-8');
 
-if (empty($_POST) && !isset($_SESSION['user']['id'])) {
+if (empty($_POST) && isset($_SESSION['user']['id'])) {
     switchingPage();
 }
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$_SESSION['data'] = [
-    'email' => $email,
-    'password' => $password
-];
-
 // Проверка на пустоту полей
-checkEmptyFields([$email, $password], 'auth');
+checkEmptyFields([$email, $password]);
 
 $sql = "SELECT id_user, name, access, password FROM users WHERE email = ?";
 $statement = $pdo->prepare($sql);
@@ -27,8 +21,8 @@ $result = $statement->fetch(PDO::FETCH_ASSOC);
 $count = $statement->rowCount();
 
 if ($count == 0) {
-    $_SESSION['message']['auth'] = 'Неправильный логин!';
-    switchingPage();
+    header('HTTP/1.0 403 Error!');
+    die (json_encode("Неправильный логин!"));
 }
 
 if (password_verify($password, $result['password'])) {
@@ -39,9 +33,11 @@ if (password_verify($password, $result['password'])) {
         'access' => $result['access']
     ];
 
-    $_SESSION['message']['success'] = 'Вы авторизовались!';
-    switchingPage();
+    die (json_encode([
+        "message" => "Вы авторизовались!",
+        "url" => $_SERVER['HTTP_REFERER']
+    ]));
 } else {
-    $_SESSION['message']['auth'] = 'Неправильный пароль!';
-    switchingPage();
+    header('HTTP/1.0 403 Error!');
+    die (json_encode("Неправильный пароль!"));
 }

@@ -1,8 +1,5 @@
 <?php
-session_start();
-
-require_once 'data/connection.php';
-require_once 'data/functions.php';
+require_once 'data/connectionFiles.php';
 
 $sql = "SELECT r.id_review, r.film_title, r.poster, r.date_added_review, u.name FROM reviews r LEFT JOIN users u ON r.id_user = u.id_user ORDER BY r.id_review DESC";
 $statement = $pdo->query($sql);
@@ -15,7 +12,8 @@ $reviews = $statement->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <title>Document</title>
 </head>
 <body>
@@ -26,12 +24,12 @@ $reviews = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <div class="card-moy">
                     <?php foreach ($reviews as $review):?>
                         <div class="card" style="width: 18rem;">
-                            <img src="<?=HSC($review['poster'])?>" class="card-img-top" alt="img">
+                            <img src="<?=formatText($review['poster'])?>" class="card-img-top" alt="img">
                             <div class="card-body">
-                                <a href="review.php?id_review=<?=$review['id_review']?>" class="film_title"><?=HSC($review['film_title'])?></a>
+                                <a href="review.php?id_review=<?=$review['id_review']?>" class="film_title"><?=formatText($review['film_title'])?></a>
                                 <div class="under_panel">
-                                    <span class="author"><?=HSC($review['name'])?></span>
-                                    <span class="date"><?=HSC($review['date_added_review'])?></span>
+                                    <span class="author"><?=formatText($review['name'])?></span>
+                                    <span class="date"><?=formatText($review['date_added_review'])?></span>
                                 </div>
                             </div>
                         </div>

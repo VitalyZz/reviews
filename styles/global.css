@@ -1,0 +1,466 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #354758;
+}
+
+header {
+    padding: 5px 10px;
+    background-color: #343a40;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+} 
+
+.home {
+    color: #4facfe;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 29px;
+    font-weight: bold;
+}
+
+.logreg {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.logreg a {
+    color: #00f2fe;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sign_in:hover, .sign_up:hover {
+    color: #4facfe;
+}
+
+.sign_in {
+    position: relative;
+    margin-right: 40px;
+}
+
+.card img {
+    height: 400px;
+}
+
+.card {
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.card-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.film_title {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #fff;
+}
+
+.film_title:hover {
+    color: #fff;
+}
+
+.author {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    color: #fff;
+}
+
+.under_panel .date {
+    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
+}
+
+.under_panel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.card-moy {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.boy {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.home_create {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.createReview {
+    color: #07d846;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 22px;
+    font-weight: 600;
+    margin-left: 80px;
+    transition: .3s;
+}
+
+.createReview:hover {
+    color: #41ff7a;
+    background-image: linear-gradient(to right, #00f2fe 0%, #4facfe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sect_cards {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1250px) {
+    .card-moy {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 950px) {
+    .card-moy {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 630px) {
+    .card-moy {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 450px) {
+    .home {
+        font-size: 20px;
+    }
+
+    .logreg a {
+        font-size: 18px;
+    }
+}
+
+/*css2*/
+
+
+.poster img {
+    width: 330px;
+    height: 500px;
+}
+
+.review {
+    padding-top: 80px;
+    padding-bottom: 10px;
+}
+
+.review-container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.review-up {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.review-up .title {
+    font-weight: bold;
+    font-size: 40px;
+    color: #fff;
+}
+
+.review-up .date {
+    font-weight: bold;
+    font-size: 28px;
+    color: #fff;
+}
+
+.block {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review_author {
+    font-weight: bold;
+    font-size: 32px;
+    color: #5177FF;
+}
+
+.review_text {
+    font-weight: bold;
+    font-size: 26px;
+    color: #CACACA;
+    margin-top: 20px;
+    text-align: justify;
+    line-height:32px;
+}
+
+.trailer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.write_comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.write_comment label {
+    margin-top: 60px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+.write_comment textarea {
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 24px;
+    resize: none;
+}
+
+.write_comment .submit_comment {
+    padding: 5px 10px;
+    background-color: #0092fe;
+    font-weight: bold;
+    font-size: 22px;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    float: right;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.write_comment .submit_comment:hover {
+    box-shadow: 0px 0px 20px #00dffe;
+}
+
+.comment {
+    margin-top: 30px;
+    padding: 10px 20px;
+    width: 100%;
+    background: #646464;
+}
+
+.comment .block-up {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.comment .block-up .comment_author {
+    font-weight: bold;
+    font-size: 26px;
+    color: #FF6464;
+}
+
+.comment .block-up .date_comment {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: justify;
+    color: #59FF88;
+}
+
+.comment .text_comment {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: justify;
+    color: #FFFFFF;
+}
+
+.commentsTitle {
+    font-weight: bold;
+    font-size: 28px;
+    color: #fff;
+}
+
+.noTrailer {
+    width: 730px;
+    height: 410px;
+    background-color: #6b7682;
+    color: #36404A;
+    font-size: 50px;
+    font-weight: 900;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-btn {
+    margin-bottom: 20px;
+}
+
+.error_comment {
+    position: absolute;
+    right: 0;
+    color: #FF6464;
+    font-size: 28px;
+}
+
+/*css3*/
+
+
+.container_createreview {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 0px 0px 0px;
+}
+
+.createReviewTitle {
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 55px;
+    color: #00FFE0;
+
+}
+
+.createReviewForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
+.createReviewForm label {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.createReviewForm input {
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: none;
+}
+
+.createReviewForm textarea {
+    font-weight: 600;
+    font-size: 22px;
+    color: rgb(0, 0, 0);
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+
+.addReviewBtn {
+    margin-top: 20px;
+    float: right;
+    background: #07D846;
+    border-radius: 3px;
+    padding: 10px 20px;
+    border: none;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+.errors_output1 {
+    position: fixed;
+    right: 100px;
+    top: 150px;
+    display: none;
+    background-color: #36404A;
+    width: 300px;
+    text-align: center;
+    border-radius: 15px 15px 3px 3px;
+}
+
+.errors_output_header1 {
+    border-radius: 15px 15px 0 0;
+    padding: 5px;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+    background-color: #ff6a5e;
+}
+
+.errors_output_text1 {
+    padding: 5px;
+    font-size: 18px;
+    color: #ff6a5e;
+    font-weight: 600;
+}
+
+.custom-button {
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px 30px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #07D846;
+    background-color: transparent;
+    border: 3px solid #07D846;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.custom-button:hover {
+    background-color: #07D846;
+    color: #fff;
+}
+
+.custom-text {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: #aaa;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.file-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

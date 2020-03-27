@@ -1,8 +1,7 @@
 <?php
-session_start();
+require_once '../data/connectionFiles.php';
 
-require_once '../data/connection.php';
-require_once '../data/functions.php';
+header('Content-type: application/json; charset=utf-8');
 
 if (empty($_POST) && $_SESSION['user']['access'] == 0) {
     switchingPage();
@@ -13,13 +12,7 @@ $text = $_POST['text'];
 $trailer = $_POST['trailer'];
 $idUser = $_SESSION['user']['id'];
 
-$_SESSION['data'] = [
-    'name' => $name,
-    'text' => $text,
-    'trailer' => $trailer
-];
-
-$namePoster = $_FILES['poster']['name'];
+$namePoster = substr(md5($_FILES['poster']['name']), 0, 8);
 $tmpNamePoster = $_FILES['poster']['tmp_name'];
 
 $patternName = '/[a-zа-я]+/iu';
@@ -32,23 +25,23 @@ $messageText = "Не верно введено поле text!\n Поле дол�
 $messageTrailer = "Не верно введено поле trailer!\n Ссылка на трейлер должна быть корректна";
 
 // Проверка на пустоту полей
-checkEmptyFields([$name, $text, $namePoster], 'poster', $messageFields, "Location: ../create.php");
+checkEmptyFields([$name, $text, $namePoster], $messageFields);
 
 // Проверка поля name
-checkField($patternName, $name, 'poster', $messageName, 'Location: ../create.php');
+checkField($patternName, $name, $messageName);
 
 // Проверка поля text
-checkField($patternText, $text, 'poster', $messageText, 'Location: ../create.php');
+checkField($patternText, $text, $messageText);
 
 // Проверка поля trailer
 if (!empty($trailer)) {
-    checkField($patternTrailer, $trailer, 'poster', $messageTrailer, 'Location: ../create.php');
+    checkField($patternTrailer, $trailer, $messageTrailer);
 }
 
 // Проверка на формат файла
 if (exif_imagetype($_FILES['poster']['tmp_name']) == false) {
-    $_SESSION['message']['poster'] = 'Постер должен быть картинкой!';
-    switchingPage('Location: ../create.php');
+    header('HTTP/1.0 403 Error!');
+    die (json_encode("Постер должен быть картинкой!"));
 }
 
 // Удаляем лишнее из ссылки на трейлер
@@ -81,4 +74,4 @@ $sql = "INSERT INTO reviews(id_user, film_title, poster, trailer, text_review)
 VALUES(:id_user, :film_title, :poster, :trailer, :text_review)";
 $statement = $pdo->prepare($sql);
 $statement->execute($arr);
-switchingPage('Location: ../index.php');
+die (json_encode("Обзор добавлен!"));

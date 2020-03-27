@@ -1,6 +1,5 @@
 <?php
-require_once '../data/functions.php';
+require_once '../data/connectionFiles.php';
 
-session_start();
 session_destroy();
 switchingPage();
