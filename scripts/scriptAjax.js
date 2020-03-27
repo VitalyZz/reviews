@@ -59,7 +59,21 @@ $(document).ready(function() {
             data: data,
             success: function(result) {
                 $('.error_comment').text(result['message']).css({color:'#65fe1a'});
-                $('.comments').load('../review.php .comments > *')
+
+                $('.comments').prepend
+                (`
+                <div class="comment">
+                    <div class="block-up">
+                        <div class="comment_author"></div>
+                        <div class="date_comment"></div>
+                    </div>
+                    <div class="text_comment"></div>
+                </div>
+                `);
+                $('.comment_author:first').html(result['comment_author']);
+                $('.date_comment:first').html(result['date_comment']);
+                $('.text_comment:first').html(nl2br(htmlspecialchars(result['text_comment'])));
+
                 $('#anchorComment')[0].reset();
             },
             error: function(result) {
