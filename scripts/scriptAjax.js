@@ -60,7 +60,7 @@ $(document).ready(function() {
             success: function(result) {
                 $('.error_comment').text(result['message']).css({color:'#65fe1a'});
                 $('#anchorComment')[0].reset();
-                $('.comments').load(`../backend/fetch.php?id_review=${idValue}`);
+                $('.comments').load(`../backend/getComments.php?id_review=${idValue}`);
                 setTimeout(function() {
                     $('.comment:first').fadeOut(500).fadeIn().css({backgroundColor: 'rgb(187,254,161)'});
 
